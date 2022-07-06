@@ -19,9 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText edittext;
     private TextView textview;
     private TextView textview2;
+    private TextView textview3;
     private Button button;
     private String word;
     private int status = 1;
+    List<Character> playerGusses = new ArrayList<>();
 
 
     @Override
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         edittext = findViewById(R.id.editTextTextMultiLine);
         textview = findViewById(R.id.textView);
         textview2 = findViewById(R.id.textView2);
+        textview3 = findViewById(R.id.textView3);
         button = findViewById(R.id.button);
         textview.setText("");
         textview2.setText(word);
@@ -47,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void buttonOnClick(View v){
         textview.setText("");
-        List<Character> playerGusses = new ArrayList<>();
         String letterGuss = edittext.getText().toString();
         playerGusses.add(letterGuss.charAt(0));
         printWordState(word, playerGusses);
