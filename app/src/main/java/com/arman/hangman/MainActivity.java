@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText edittext;
     private TextView textview;
     private TextView textview2;
-    private TextView textview3;
+
+
     private Button button;
     private String word;
     private int status = 1;
+    private int correctCount = 1;
     List<Character> playerGusses = new ArrayList<>();
 
 
@@ -39,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         edittext = findViewById(R.id.editTextTextMultiLine);
         textview = findViewById(R.id.textView);
         textview2 = findViewById(R.id.textView2);
-        textview3 = findViewById(R.id.textView3);
+
+
         button = findViewById(R.id.button);
         textview.setText("");
         textview2.setText(word);
@@ -58,16 +62,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void printWordState(String word, List<Character> playerGusses){
+
         for (int i = 0; i < word.length(); i++){
             if (playerGusses.contains(word.charAt(i))) {
-
+                correctCount++;
                 textview.setText(textview.getText().toString() + word.charAt(i) + " ");
             }
             else{
                 textview.setText(textview.getText().toString() + "- ");
             }
+
         }
+
+
     }
+
+
+
+
+
+
+
 
     public void incorrectSelection (View v){
         //textview.setText(word[1]);
