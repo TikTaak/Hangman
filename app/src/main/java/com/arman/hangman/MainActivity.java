@@ -20,12 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private EditText edittext;
     private TextView textview;
     private TextView textview2;
-
+    private TextView textview3;
+    private EditText editText2;
+    private TextView invisible;
 
     private Button button;
     private String word;
     private int status = 1;
-    private int correctCount = 1;
+    private int testCorecction = 0;
+    private int correct = 0;
     List<Character> playerGusses = new ArrayList<>();
 
 
@@ -42,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
         edittext = findViewById(R.id.editTextTextMultiLine);
         textview = findViewById(R.id.textView);
         textview2 = findViewById(R.id.textView2);
-
-
+        textview3 = findViewById(R.id.textView3);
+        editText2 = findViewById(R.id.editText2);
+        invisible = findViewById(R.id.invisible);
         button = findViewById(R.id.button);
         textview.setText("");
         textview2.setText(word);
@@ -53,19 +57,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void buttonOnClick(View v){
+
         textview.setText("");
         String letterGuss = edittext.getText().toString();
         playerGusses.add(letterGuss.charAt(0));
         printWordState(word, playerGusses);
-
+        //printWordTest(word, playerGusses);
+        edittext.setText("");
         ///////
 
     }
     public void printWordState(String word, List<Character> playerGusses){
 
+        testCorecction = correct;
+        correct = 0;
         for (int i = 0; i < word.length(); i++){
             if (playerGusses.contains(word.charAt(i))) {
-                correctCount++;
+                correct++;
                 textview.setText(textview.getText().toString() + word.charAt(i) + " ");
             }
             else{
@@ -75,18 +83,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        if (testCorecction == correct){
+            incorrectSelection();
+        }
+
+        //editText2.setText("Corrects = " + Integer.toString(correct));
+
+        if (correct == word.length()){
+            incorrectSelection();
+            editText2.setText("You Win");
+        }
+
     }
+    /*
+    public boolean printWordTest(String word, List<Character> playerGusses){
 
+        int correctCount = 0;
 
+        for (int i = 0; i < word.length(); i++){
+            if (playerGusses.contains(word.charAt(i))) {
+                invisible.setText(textview.getText().toString() + word.charAt(i) + " ");
+                correctCount++;
+            }
+            else{
+                invisible.setText(textview.getText().toString() + "- ");
+            }
 
+        }
+        if (testCorecction== correct){
+            incorrectSelection();
+        }
 
+        //editText2.setText("Corrects = " + Integer.toString(correct));
 
+        if (correct == word.length()){
+            incorrectSelection();
+            editText2.setText("You Win");
+        }
 
-
-
-    public void incorrectSelection (View v){
-        //textview.setText(word[1]);
-        //imageview.setImageResource(R.drawable.hang1);
+        return (word.length() == correctCount);
+    }*/
+    ///////////////
+    public void incorrectSelection() {
         if (status == 1){
             hang1Img();
         }
